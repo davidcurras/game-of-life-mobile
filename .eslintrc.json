@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "semi": [2, "never"],
+    "react/no-array-index-key": [0],
+    "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
+    "react/jsx-filename-extension": [0, { "extensions": [".js"] }],
+    "react/forbid-prop-types": [0, { "forbid": [], "checkContextTypes": false, "checkChildContextTypes": false }]
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "extends": "airbnb"
+}
