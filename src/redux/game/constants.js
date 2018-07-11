@@ -1,5 +1,5 @@
 // @flow
-export const TOGGLE_CELL = 'TOGGLE_CELL'
-export const NEXT_STEP = 'NEXT_STEP'
-export const TOGGLE_PLAY = 'TOGGLE_PLAY'
-export const DEFAULT_ACTIVE_BOARD = 'DEFAULT_ACTIVE_BOARD'
+export const TOGGLE_CELL = 'game-of-life/TOGGLE_CELL'
+export const NEXT_STEP = 'game-of-life/NEXT_STEP'
+export const TOGGLE_PLAY = 'game-of-life/TOGGLE_PLAY'
+export const PRESET = 'game-of-life/PRESET'

@@ -1,3 +1,6 @@
+// @flow
+import { applyRandomLifeform } from './lifeforms'
+
 const generateEmptyRow = (length = 10) => Array(length).fill(0)
 
 export const generateEmptyBoard = (length = 10) => {
@@ -43,13 +46,7 @@ export const getNextBoard = (board) => {
   return nextBoard
 }
 
-export const setDefaultActiveBoard = () => {
+export const preSet = () => {
   const nextBoard = generateEmptyBoard()
-  nextBoard[0][0] = 1
-  nextBoard[0][1] = 1
-  nextBoard[1][0] = 1
-  nextBoard[1][3] = 1
-  nextBoard[2][1] = 1
-  nextBoard[2][2] = 1
-  return nextBoard
+  return applyRandomLifeform(nextBoard)
 }

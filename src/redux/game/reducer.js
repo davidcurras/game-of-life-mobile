@@ -3,13 +3,13 @@ import {
   TOGGLE_CELL,
   NEXT_STEP,
   TOGGLE_PLAY,
-  DEFAULT_ACTIVE_BOARD,
+  PRESET,
 } from './constants'
 import initialState from './initialState'
 import {
   toggleInBoard,
   getNextBoard,
-  setDefaultActiveBoard,
+  preSet,
 } from '../../helpers/game-of-life'
 
 export default (state = initialState, action) => {
@@ -29,10 +29,10 @@ export default (state = initialState, action) => {
         ...state,
         isPlaying: !state.isPlaying,
       }
-    case DEFAULT_ACTIVE_BOARD:
+    case PRESET:
       return {
         ...state,
-        board: setDefaultActiveBoard(),
+        board: preSet(),
       }
     default:
       return state

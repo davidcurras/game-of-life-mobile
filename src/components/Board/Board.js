@@ -6,7 +6,7 @@ import Cell from './Cell'
 import styles from './Board.style'
 
 type State = { board: BoardType, isPlaying: Boolean }
-type Dispatch = { nextStep: Function, togglePlay: Function }
+type Dispatch = { nextStep: Function, togglePlay: Function, preSet: Function }
 type ReduxProps = State & Dispatch
 type Props = ReduxProps & {}
 
@@ -31,6 +31,11 @@ class BoardComponent extends Component<Props> {
     const { nextStep, togglePlay, isPlaying } = this.props
     if (!isPlaying) nextStep()
     togglePlay()
+  }
+
+  preSetHandler = () => {
+    const { preSet } = this.props
+    preSet()
   }
 
   drawCells = (row, x) => (
@@ -58,7 +63,7 @@ class BoardComponent extends Component<Props> {
       <View>
         <View style={styles.titleArea}>
           <Text style={styles.title}>
-            GAME OF LIFE
+            Game Of Life
           </Text>
         </View>
         <View style={styles.board}>
@@ -79,6 +84,16 @@ class BoardComponent extends Component<Props> {
           >
             <Text style={styles.buttonText}>
               {isPlaying ? 'Stop Game!' : 'Start Game!'}
+            </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.buttons}>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.preSetHandler}
+          >
+            <Text style={styles.buttonText}>
+              Pre Set
             </Text>
           </TouchableHighlight>
         </View>
