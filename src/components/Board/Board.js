@@ -1,22 +1,36 @@
 // @flow
 import React, { Component } from 'react'
 import { View, TouchableHighlight, Text } from 'react-native'
+import type { Board as BoardType } from '../../redux/game/initialState'
 import Cell from './Cell'
 import styles from './Board.style'
 
-type Props = {
-  board: Array<Array<number>>,
-  isPlaying: boolean,
-}
+type State = { board: BoardType, isPlaying: Boolean }
+type Dispatch = { nextStep: Function, togglePlay: Function }
+type ReduxProps = State & Dispatch
+type Props = ReduxProps & {}
+
+const stepTime = 500
 
 class BoardComponent extends Component<Props> {
-  nextStepHandler = () => {
-    console.log('Next Step')
+  componentWillReceiveProps(nextProps) {
+    const { nextStep, board } = this.props
+    const { isPlaying, board: nextBoard } = nextProps
+    if (isPlaying && board && nextBoard !== board) {
+      setTimeout(() => nextStep(), stepTime)
+    }
+  }
+
+  nextStepHandler = (forced) => {
+    const { nextStep, isPlaying } = this.props
+    if (isPlaying || forced) nextStep()
   }
 
   // move steps forward every 1000ms
   playGameHandler = () => {
-    console.log('Play Game')
+    const { nextStep, togglePlay, isPlaying } = this.props
+    if (!isPlaying) nextStep()
+    togglePlay()
   }
 
   drawCells = (row, x) => (
@@ -44,7 +58,7 @@ class BoardComponent extends Component<Props> {
       <View>
         <View style={styles.titleArea}>
           <Text style={styles.title}>
-            Game of Life
+            GAME OF LIFE
           </Text>
         </View>
         <View style={styles.board}>
@@ -53,7 +67,7 @@ class BoardComponent extends Component<Props> {
         <View style={styles.buttons}>
           <TouchableHighlight
             style={styles.button}
-            onPress={this.nextStepHandler}
+            onPress={() => this.nextStepHandler(true)}
           >
             <Text style={styles.buttonText}>
               Next Step!

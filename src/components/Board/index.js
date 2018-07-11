@@ -1,17 +1,17 @@
 // @flow
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { nextStep, togglePlay } from '../../redux/game/actions'
 import Board from './Board'
 
-const mapStateToProps = () => ({
-  board: [
-    [0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0],
-    [0, 1, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0],
-    [1, 0, 0, 1, 0, 0],
-    [0, 1, 0, 0, 1, 0],
-  ],
-  isPlaying: false,
+const mapStateToProps = ({ game: { board, isPlaying } }) => ({
+  board,
+  isPlaying,
 })
 
-export default connect(mapStateToProps)(Board)
+const mapDispatchToProps = dispatch => ({
+  nextStep: bindActionCreators(nextStep, dispatch),
+  togglePlay: bindActionCreators(togglePlay, dispatch),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

@@ -3,11 +3,15 @@ import React, { PureComponent } from 'react'
 import { TouchableOpacity } from 'react-native'
 import styles from './Cell.style'
 
-type Props = { value: number }
+type State = {}
+type Dispatch = { toggleCell: Function }
+type ReduxProps = State & Dispatch
+type Props = ReduxProps & { x: number, y: number, value: number }
 
 class CellComponent extends PureComponent<Props> {
   clickHandler = () => {
-    console.log('Toggle alive')
+    const { toggleCell, x, y } = this.props
+    toggleCell(x, y)
   }
 
   render() {
